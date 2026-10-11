@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head><title>汇编浏览器示例页</title></head>
+<body>
+<h1>ASM 浏览器内核</h1>
+<p>这是一个由 x86-64 汇编语言编写的浏览器内核渲染的页面。内核按模块化设计：net.asm 网络协议栈、http.asm 报文解析、html.asm 解析器、css.asm 样式表、render.asm 渲染器，前端为 Python Tkinter。</p>
+<a href="http://example.com">点击这里访问 example.com</a>
+<ul>
+<li>模块一：net.asm —— DNS + HTTP/1.1 客户端</li>
+<li>模块二：html.asm —— 流式 HTML 解析器</li>
+<li>模块三：render.asm —— 盒模型布局与绘制指令</li>
+</ul>
+<h2>协议支持</h2>
+<p>当前支持 file:// 与 http:// 协议，DNS 解析通过 UDP 查询实现；HTTPS/TLS 因纯汇编实现不可行，暂不支持（详见 README）。</p>
+<p>实体解码测试：&amp; &lt; &gt; &quot; &#39; &nbsp;中文与 emoji 也可以渲染。</p>
+</body>
+</html>

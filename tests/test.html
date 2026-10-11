@@ -1,0 +1,22 @@
+<html>
+<body>
+<h1>汇编浏览器测试页</h1>
+<p>这是一个用于验证 file:// 渲染的本地测试页面。</p>
+<h2>段落测试</h2>
+<p>第一行：Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+<p>第二行：中文渲染测试 —— 汇编浏览器内核通过 stdin/stdout 与 Python Tkinter 前端通信。</p>
+<h2>列表测试</h2>
+<p>项目一：net.asm 网络协议栈</p>
+<p>项目二：html.asm 流式解析器</p>
+<p>项目三：render.asm 盒模型渲染</p>
+<h2>链接测试</h2>
+<p>点击这里访问 example.com</p>
+<h2>实体与特殊字符</h2>
+<p>实体：&amp; &lt; &gt; &quot; &#39;</p>
+<p>符号：< > & " ' © ® ™</p>
+<p>Emoji：🐢 🦀 🐍 🌐</p>
+<h2>长文本</h2>
+<p>这是一段较长的文本，用来验证渲染器能否正确处理多行内容。浏览器内核逐字节扫描 HTML，跳过标签，把可见文本按行输出到 Tkinter 画布。每遇到一个文本块就发出一条 T 指令，前端按 x/y 坐标绘制。</p>
+<p>结束。</p>
+</body>
+</html>

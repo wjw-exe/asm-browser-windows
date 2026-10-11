@@ -1,0 +1,2 @@
+NAV file:///D:/at/asm-browser-windows-main/tests/sample.html
+QUIT
