@@ -16,6 +16,11 @@
 
 #pragma comment(lib, "ws2_32.lib")
 
+/* hand-written assembly helpers in utils.S */
+extern size_t asm_strlen(const char *s);
+extern int asm_is_space(char c);
+extern void asm_upperc(char *s);
+
 static HANDLE hOut = NULL;
 static char docbuf[65536];
 static int doclen = 0;
@@ -26,7 +31,8 @@ static void out_raw(const char *s, int n) {
     WriteFile(hOut, s, n, &wr, NULL);
 }
 static void out_line(const char *s) {
-    out_raw(s, (int)strlen(s));
+    int n = (int)asm_strlen(s);
+    out_raw(s, n);
     out_raw("\n", 1);
 }
 
@@ -180,7 +186,7 @@ int main(void) {
         if (strncmp(cmd, "QUIT", 4) == 0) { WSACleanup(); return 0; }
         if (strncmp(cmd, "NAV ", 4) != 0) continue;
         const char *url = cmd + 4;
-        while (*url == ' ') url++;
+        while (*url && asm_is_space(*url)) url++;
 
         if (starts_with(url, "file://")) {
             const char *path = url + 7;
@@ -191,7 +197,10 @@ int main(void) {
             }
             render_doc(docbuf, doclen);
         } else if (starts_with(url, "http://")) {
-            out_line("S 正在连接...");
+            char st[64];
+            snprintf(st, sizeof(st), "S connecting: %s", url + 7);
+            asm_upperc(st);          /* hand-written asm: uppercase the status line */
+            out_line(st);
             if (!http_load(url)) {
                 out_line("E http 请求失败");
                 continue;
